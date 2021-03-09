@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zstu.edu.mapper.FeedbackMapper">
+
+    <select id="selectScoreAvgByDishesId" resultType="java.lang.Double">
+        select avg(score) from feedback where dishes_id=#{dishesId} and score!=0
+    </select>
+    <select id="selectScoreAvgByStallId" resultType="java.lang.Double">
+        select avg(score) from feedback where stall_id=#{stallId} and score!=0
+    </select>
+    <select id="selectByCondition" resultType="com.zstu.edu.entity.Feedback">
+        select * from feedback where 1=1
+        <if test="userId != null">
+            and student_id=#{userId}
+        </if>
+        <if test="dishesId != null">
+            and dishes_id=#{dishesId}
+        </if>
+        order by feedback_time desc
+    </select>
+</mapper>

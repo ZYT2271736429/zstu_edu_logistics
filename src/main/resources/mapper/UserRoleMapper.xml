@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zstu.edu.mapper.UserRoleMapper">
+    <insert id="insertUserRole">
+        <if test="roleIdList!=null and roleIdList.size()>0">
+            insert into user_role (user_id,role_id) values
+            <foreach collection="roleIdList" index="index" item="item" separator=",">
+                (#{userId},#{item})
+            </foreach>
+        </if>
+    </insert>
+    <delete id="deleteByUserId">
+        delete from user_role where user_id=#{userId}
+    </delete>
+
+    <select id="selectByUserId" resultType="java.lang.Integer">
+        select role_id from user_role where user_id=#{id}
+    </select>
+    <select id="selectByCondition" resultType="com.zstu.edu.entity.UserRole">
+        select * from user_role where role_id!=2
+        <if test="userId!=null">
+            and user_id=#{userId}
+        </if>
+        <if test="roleId!=null">
+            and role_id=#{roleId}
+        </if>
+    </select>
+</mapper>

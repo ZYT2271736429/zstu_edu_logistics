@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+#文件上传
+file:
+  #静态资源对外暴露的访问路径
+  staticAccessPath: /api/file/**
+  #静态资源实际存储路径
+  uploadFolder: E:/staticImages/
+  #项目名
+  servlet:
+    context-path:
+    #文件上传
+    multipart:
+    enable: true
+    max-file-size: 10mb
+    max-request-size: 10mb
+
+#spring配置
+spring:
+  #数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/logistics_system?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=utf8&allowPublicKeyRetrieval=true
+    username: root
+    password: 2271736429
+  #redis配置
+  redis:
+    #超时时间
+    timeout: 1000ms
+    #服务器地址
+    host: 127.0.0.1
+    #服务器端口
+    port: 6379
+    #数据库
+    database: 0
+    lettuce:
+      pool:
+        #最大连接数,默认8
+        max-active: 1024
+        #最大连接阻塞等待时间,默认-1
+        max-wait: 1000ms
+        #最大空闲连接
+        max-idle: 200
+        #最小空闲连接
+        min-idle: 5
+
+#mybatis配置
+mybatis-plus:
+  #别名
+  type-aliases-package: com.zstu.edu.entity
+  #mapper的文件
+  mapper-locations: classpath:mapper/*.xml
+  #mybatis的核心配置文件
+  config-location: classpath:mybatis-config.xml

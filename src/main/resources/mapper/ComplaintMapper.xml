@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zstu.edu.mapper.ComplaintMapper">
+
+    <select id="selectByCondition" resultType="com.zstu.edu.entity.Complaint">
+        select * from complaint where 1=1
+        <if test="userId != null">
+            and student_id = #{userId}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+        order by complaint_time desc
+    </select>
+</mapper>

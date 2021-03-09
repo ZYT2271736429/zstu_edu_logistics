@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zstu.edu.mapper.UserMapper">
+    <insert id="addDorm">
+        update user set room_id=#{dormId} where username=#{username}
+    </insert>
+    <update id="updatePassword">
+        update user set password=#{newpwd} where username=#{username}
+    </update>
+    <update id="updateInfo">
+        update user set phone=#{phone},avatar=#{avatar} where username=#{username}
+    </update>
+    <delete id="deleteDorm">
+        update user set room_id=null where id=#{id}
+    </delete>
+
+    <select id="selectByUsername" resultType="com.zstu.edu.entity.User">
+        select * from user where username=#{name}
+    </select>
+    <select id="selectListByRoomsId" resultType="com.zstu.edu.entity.User">
+        select * from user where room_id=#{roomsId}
+    </select>
+    <select id="search" resultType="com.zstu.edu.entity.User">
+        select * from user where (username like concat('%',#{search},'%')) or (name like concat('%',#{search},'%'))
+    </select>
+    <select id="selectNoStudent" resultType="com.zstu.edu.entity.User">
+        select * from user where student_if=0 and administrator_if=0
+    </select>
+</mapper>

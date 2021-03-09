@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zstu.edu.mapper.RepairMapper">
+
+    <select id="selectByRepairStatus" resultType="com.zstu.edu.entity.Repair">
+        select * from repair where repair_status=#{id} order by submit_time desc
+    </select>
+    <select id="selectByUserIdLimitOne" resultType="com.zstu.edu.entity.Repair">
+        select * from repair where student_id=#{userId} and repair_status in (1,2) order by submit_time desc limit 1
+    </select>
+    <select id="selectByStudentId" resultType="com.zstu.edu.entity.Repair">
+        select * from repair where student_id=#{userId} order by submit_time desc
+    </select>
+    <select id="selectByUserIdLimitOneStatus" resultType="com.zstu.edu.entity.Repair">
+        select * from repair where student_id=#{userId} order by submit_time desc limit 1
+    </select>
+</mapper>
